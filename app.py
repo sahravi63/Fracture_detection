@@ -1,4 +1,6 @@
 """Web app: upload an X-ray, get a fractured / not fractured prediction.  Run: python app.py"""
+import os
+
 import gradio as gr
 
 from classifier import FractureClassifier
@@ -39,5 +41,8 @@ with gr.Blocks(title="Bone Fracture Classifier") as demo:
     thr.release(analyse, [img, thr], [label, text])
 
 if __name__ == "__main__":
-    # No fixed port: Gradio starts at 7860 (or $GRADIO_SERVER_PORT) and moves to the next free one if it is busy
-    demo.launch(server_name="127.0.0.1", share=True)
+    demo.launch(
+        server_name="0.0.0.0",
+        server_port=int(os.environ.get("PORT", "7860")),
+        share=False,
+    )

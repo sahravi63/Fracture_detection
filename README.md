@@ -18,9 +18,17 @@ pip install -r requirements.txt
 
 ## Web app
 ```bash
-python app.py        # opens on http://localhost:7860
+python app.py        # open http://localhost:7860
 ```
 Upload an X-ray to see the probabilities. The slider sets the decision threshold: lowering it (for example 0.3) catches more fractures at the cost of more false alarms, which is usually the right trade for screening.
+
+## Deploy on Render
+
+1. Push this repository to GitHub.
+2. In Render, choose **New +** → **Blueprint** and select the repository.
+3. Render reads `render.yaml`, installs `requirements.txt`, and starts the app. Open the generated `onrender.com` URL when the deploy is live.
+
+The app binds to `0.0.0.0` and uses Render's `PORT` environment variable. The ONNX model is included in the repository, so no additional environment variables or storage are required.
 
 ## Command line
 ```bash
